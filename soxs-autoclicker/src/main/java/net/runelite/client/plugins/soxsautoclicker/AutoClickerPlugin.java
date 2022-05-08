@@ -66,6 +66,7 @@ public class AutoClickerPlugin extends Plugin {
 
     private ExecutorService executorService, clickService, clientService;
     private Point savedPoint;
+    private Point newsavedPoint;
     private Random random;
     public static boolean run;
     private static AutoClickerPlugin instance;
@@ -139,7 +140,8 @@ public class AutoClickerPlugin extends Plugin {
                         if (config.followMouse()) {
                             clickService.submit(() -> click(lastPointBeforeBreak = client.getMouseCanvasPosition()));
                         } else
-                            clickService.submit(() -> click(lastPointBeforeBreak = savedPoint));
+                            newsavedPoint=new Point((int) (savedPoint.getX()+random.nextInt(10+10+1)-10), (int) (savedPoint.getY() +random.nextInt(10+10+1)-10));
+                        	clickService.submit(() -> click(lastPointBeforeBreak = savedPoint));
                     });
                 }
             }
